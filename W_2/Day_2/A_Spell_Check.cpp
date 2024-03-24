@@ -11,27 +11,50 @@ int main()
         cin.ignore();
         string s;
         cin >> s;
-        int cnt[26];
+        int cnt[26] = {0};
+        bool ans = true;
 
         for(char c: s)
         {
-            if(c == 'T')
+            if(isalpha(c))
             {
-                cnt['t' - 'a']++;
+                if(c == 'T')
+                {
+                    cnt['t' - 'a']++;
+                }
+                else if((c != 't')  && c >= 'a' && c <= 'z')
+                {
+                    cnt[c - 'a']++;
+                }
+                else
+                {
+                    ans = false;
+                }
             }
-            else if(c != 't')
-            {
-                cnt[c - 'a']++;
-            }
-        }
-
-        bool ans = true;
-
-        for(char c: 'Timur')
-        {
-            if(cnt[c-'a'] != 1)
+            else
             {
                 ans = false;
+            }
+        }
+        if (n != 5) {
+            cout << "NO" << "\n";
+            continue;
+        }
+        if(!ans)
+        {
+            cout << "NO" << "\n";
+            continue;
+        }
+        for(char c : "timur")
+        {
+            if(c != '\0')
+            {
+                if(cnt[c- 'a'] != 1)
+                {
+                    //cout << c << endl;
+                    ans = false;
+                    break;
+                }
             }
         }
 
@@ -42,6 +65,7 @@ int main()
         else
         {
             cout << "NO" << "\n";
+
         }
     }
     return 0;
