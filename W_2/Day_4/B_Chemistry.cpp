@@ -1,5 +1,20 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+
+bool cpal(const string& s, int k) {
+    unordered_map<char, int> f;
+    for (char c : s) {
+        f[c]++;
+    }
+
+    int odd = 0;
+    for (auto& p : f) {
+        if (p.second % 2 != 0) {
+            odd++;
+        }
+    }
+    return odd <= k + 1;
+}
 
 int main() {
     int t;
@@ -11,57 +26,11 @@ int main() {
         string s;
         cin >> s;
 
-        int l = 0, r = n-1;
-        bool f = true;
-        while(l < r)
-        {
-            if(s[l] != s[r])
-            {
-                f=false;
-                break;
-            }
-            ++l;
-            --r;
-        }
-        if(f)
-        {
+        if (cpal(s, k)) {
             cout << "YES" << "\n";
-            continue;
+        } else {
+            cout << "NO" << "\n";
         }
-        if(l >= r)
-        {
-            cout << "YES" << "\n";
-            continue;
-        }
-        map<char, int> mp
-        for(int i = 0; i < n; i++)
-        {
-            mp[s[i]]++;
-        }
-        for(auto& it: mp)
-        {
-            char f = it.first;
-            vector<char> v;
-            for(int i = 0; i < n; i++)
-            {
-                if(s[i] != f)
-                {
-                    v.push_back(s[i]);
-                }
-
-                int s = 0, e = v.size()-1;
-                bool pal
-                while(s < e)
-                {
-                    if(v[s] != v[e])
-                    {
-
-                    }
-                }
-            }
-        }
-
-
     }
     return 0;
 }
