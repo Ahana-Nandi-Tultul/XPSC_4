@@ -13,7 +13,8 @@ int main() {
             cin >> v[i];
         }
 
-        int op = 0, ans = 0;
+        int op = 0;
+        long long int ans = 0;
         for(int i = 0; i  < n; i++)
         {
             if(v[i] <= q)
