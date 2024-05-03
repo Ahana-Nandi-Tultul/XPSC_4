@@ -31,7 +31,7 @@ int main()
 
     int ans = 0;
     vector<int> fm = am[m];
-    for(int i = 0; i < am.size(); i++)
+    for(int i = 0; i < am.size() - 1; i++)
     {
         vector<int> temp = am[i];
         int cnt = 0;
@@ -49,6 +49,6 @@ int main()
         }
     }
 
-    cout << (ans - 1) << "\n";
+    cout << ans << "\n";
     return 0;
 }
