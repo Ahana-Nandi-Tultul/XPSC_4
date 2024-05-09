@@ -20,7 +20,7 @@ int main()
         sort(v.begin(), v.end(), greater<int>());
 
         int cnt = 0;
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < k; i++)
         {
             int need = (n - v[i]);
             //cout << v[i] << " ";
