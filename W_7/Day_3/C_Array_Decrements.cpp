@@ -1,52 +1,73 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main()
-{
+
+int main() {
     int t;
     cin >> t;
-    while(t--)
-    {
+
+    while (t--) {
         int n;
         cin >> n;
-        vector<int>a(n), b(n);
+        vector<int> a(n), b(n);
 
-        for(int i = 0; i <n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             cin >> a[i];
         }
 
-        for(int i = 0; i <n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             cin >> b[i];
         }
 
-        sort(a.begin(), a.end());
-        sort(b.begin(), b.end());
+        if (n == 1) {
+            if (b[0] > a[0]) {
+                cout << "NO" << "\n";
+            } else {
+                cout << "YES" << "\n";
+            }
+            continue;
+        }
 
         bool ans = true;
-        for(int i = 0; i <n; i++)
-        {
-            if(b[i] > a[i])
-            {
+        int zeroCount = 0;
+        map<int, int> diff_count;
+
+        for (int i = 0; i < n; i++) {
+            if (b[i] > a[i]) {
                 ans = false;
                 break;
             }
+            if (b[i] != 0) {
+                diff_count[a[i] - b[i]]++;
+            } else {
+                zeroCount++;
+            }
         }
 
-        if(ans)
-        {
-            int mna =INT_MAX, mxa= INT_MIN, mnb = INT_MAX, mxb = INT_MIN;
-            for(int i = 0; i < n; i++)
-            {
-                if(a[i] > mxa && a[i] != 0) mxa = a[i];
-                if(a[i] < mna && a[i] != 0) mna = a[i];
-                if(b[i] > mxb && b[i] != 0) mxb = b[i];
-                if(b[i] < mnb && b[i] != 0) mnb = b[i];
+        if (ans) {
+            if (diff_count.size() == 1 && zeroCount == 0) {
+                cout << "YES" << "\n";
+            } else if (diff_count.size() > 1) {
+                cout << "NO" << "\n";
+            } else {
+                bool valid = true;
+                int consistentDiff = (diff_count.size() == 1) ? diff_count.begin()->first : -1;
+
+                for (int i = 0; i < n; i++) {
+                    if (b[i] == 0) {
+                        if (consistentDiff != -1 && a[i] > consistentDiff) {
+                            valid = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (valid) {
+                    cout << "YES" << "\n";
+                } else {
+                    cout << "NO" << "\n";
+                }
             }
-            cout << mxa << " " << mna << " " << mxb << " " << mnb << "\n";
-        }
-        else
-        {
+        } else {
             cout << "NO" << "\n";
         }
     }
