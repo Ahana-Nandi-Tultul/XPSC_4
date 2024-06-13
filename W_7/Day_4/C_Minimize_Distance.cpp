@@ -13,7 +13,7 @@ int main()
         {
             int x;
             cin >> x;
-            if(x >= 0)
+            if(x > 0)
             {
                 pos.push_back(x);
             }
@@ -25,24 +25,57 @@ int main()
 
         sort(pos.begin(), pos.end());
         sort(neg.begin(), neg.end());
-
-        vector<int> nv(pos.begin(), pos.end());
-        nv.insert(nv.end(), neg.begin(), neg.end());
-
         long long int ans = 0;
-        for(int i = (k - 1); i < n; i += k)
+        int a = 0, b = 0;
+        if(!pos.empty())
         {
-             if(i < (n - k))
+            if(pos.size() < k)
             {
-               ans += (nv[i] * 2);
+                a = pos[pos.size() - 1];
+                ans += a;
             }
             else
             {
-               ans += nv[i];
+                a = pos[pos.size() - 1];
+                for(int i = 0; i < pos.size(); i++)
+                {
+                    if(i == (pos.size() - 1))
+                    {
+                        ans += pos[i];
+                    }
+                    else if((pos.size() - i - 1) % k == 0)
+                    {
+                        ans += (pos[i] * 2);
+                    }
+                }
+            }
+        }
+        if(!neg.empty())
+        {
+            if(neg.size() < k)
+            {
+                b = neg[neg.size() - 1];
+                ans += b;
+            }
+            else
+            {
+                b = neg[neg.size() - 1];
+                for(int i = 0; i < neg.size(); i++)
+                {
+                    if(i == (neg.size() - 1))
+                    {
+                        ans += neg[i];
+                    }
+                    else if((neg.size()  - i - 1) % k == 0)
+                    {
+                        ans += (neg[i] * 2);
+                    }
+                }
             }
         }
 
-        cout << ans  << "\n";
+        ans += min(a, b);
+        cout << ans << "\n";
     }
     return 0;
 }
